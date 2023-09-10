@@ -4,7 +4,12 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Console.WriteLine("Program is running!");
+
+            Logger.NewSession();
+            Logger.LogMessage("Testing message");
+
+            Console.WriteLine("Program finished.");
         }
     }
 }
