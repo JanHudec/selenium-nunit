@@ -2,11 +2,6 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace selenium_nunit
 {
@@ -58,7 +53,7 @@ namespace selenium_nunit
         [TearDown]
         public void TearDown()
         {            
-            Logger.LogMessage("Test result: XYZ");
+            Logger.LogMessage("Test result: success");  // todo
             driver.Close();
         }
 

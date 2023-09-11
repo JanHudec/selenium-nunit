@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace selenium_nunit
+﻿namespace selenium_nunit
 {
     internal class Program
     {
@@ -10,12 +8,12 @@ namespace selenium_nunit
             Logger.LogMessage("Testing message");
 
             TeamsChromeTest teamsChromeTest = new TeamsChromeTest();
-            // teamsChromeTest.SendFile();
-            // teamsChromeTest.WriteMessage();
+            teamsChromeTest.SendFile();
+            teamsChromeTest.WriteMessage();
 
             TeamsFirefoxTest teamsFirefoxTest = new TeamsFirefoxTest();
             teamsFirefoxTest.SendFiles();
-            // teamsFirefoxTest.WriteMessages();
+            teamsFirefoxTest.WriteMessages();
         }
     }
 }
