@@ -1,4 +1,6 @@
-﻿namespace selenium_nunit
+﻿using Newtonsoft.Json;
+
+namespace selenium_nunit
 {
     internal class Program
     {
@@ -8,6 +10,9 @@
 
             Logger.NewSession();
             Logger.LogMessage("Testing message");
+
+            Console.WriteLine(LoginCredentials.GetLogin());
+            Console.WriteLine(LoginCredentials.GetPassword());
 
             Console.WriteLine("Program finished.");
         }

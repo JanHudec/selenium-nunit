@@ -399,3 +399,6 @@ FodyWeavers.xsd
 
 # logging file
 selenium-nunit/log.txt
+
+# Ignore the configuration file
+config.env

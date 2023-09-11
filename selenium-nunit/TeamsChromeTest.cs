@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,8 @@ namespace selenium_nunit
     {
         /// <summary>
         /// Method <c>SendFile</c> sends a file from OneDrive.
-        /// </summary>        
+        /// </summary>
+        [Test]
         public void SendFile()
         {
 
@@ -18,7 +20,8 @@ namespace selenium_nunit
 
         /// <summary>
         /// Method <c>WriteMessage</c> writes a message in chat.
-        /// </summary>  
+        /// </summary>
+        [Test]
         public void WriteMessage()
         {
 
