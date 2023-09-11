@@ -53,7 +53,7 @@ namespace selenium_nunit
             driver.FindElement(By.XPath("/html/body/div[1]/div/div/div/div[7]/div/div/div[3]/div/div[4]/div[1]/div[3]/div/p"))
                 .SendKeys(Keys.Enter);
 
-            Thread.Sleep(2000);
+            Thread.Sleep(4000);
 
             base.TearDown();
 

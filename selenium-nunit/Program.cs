@@ -6,8 +6,6 @@ namespace selenium_nunit
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Program is running!");
-
             Logger.NewSession();
             Logger.LogMessage("Testing message");
 
@@ -16,9 +14,8 @@ namespace selenium_nunit
             // teamsChromeTest.WriteMessage();
 
             TeamsFirefoxTest teamsFirefoxTest = new TeamsFirefoxTest();
-            teamsFirefoxTest.WriteMessages();
-
-            Console.WriteLine("Program finished.");
+            teamsFirefoxTest.SendFiles();
+            // teamsFirefoxTest.WriteMessages();
         }
     }
 }
