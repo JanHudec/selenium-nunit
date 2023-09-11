@@ -12,8 +12,11 @@ namespace selenium_nunit
             Logger.LogMessage("Testing message");
 
             TeamsChromeTest teamsChromeTest = new TeamsChromeTest();
-            teamsChromeTest.SendFile();
+            // teamsChromeTest.SendFile();
             // teamsChromeTest.WriteMessage();
+
+            TeamsFirefoxTest teamsFirefoxTest = new TeamsFirefoxTest();
+            teamsFirefoxTest.WriteMessages();
 
             Console.WriteLine("Program finished.");
         }

@@ -19,13 +19,11 @@ namespace selenium_nunit
         /// </summary>
         [SetUp]
         public void SetUp()
-        {
-            Console.WriteLine("SetUp is running");
-            Logger.NewSession();
+        {            
             Logger.LogMessage("Loging started");
-            driver = GetWebDriver();
+            driver = GetWebDriver();            
 
-            driver.Url = "https://teams.microsoft.com/";
+            driver.Url = "https://teams.microsoft.com/";            
 
             Thread.Sleep(3000);
 
@@ -39,21 +37,17 @@ namespace selenium_nunit
             driver.FindElement(By.XPath("/html/body/div/form[1]/div/div/div[2]/div[1]/div/div/div/div/div/div[3]/div/div[2]/div/div[3]/div/div[2]/input"))
                 .SendKeys(LoginCredentials.GetPassword() + Keys.Enter);
 
+            Thread.Sleep(1000);
+
             // cancel stay logged in prompt
             driver.FindElement(By.XPath("/html/body/div/form/div/div/div[2]/div[1]/div/div/div/div/div/div[3]/div/div[2]/div/div[3]/div[2]/div/div/div[1]/input"))
                 .Click();
 
             Thread.Sleep(30000);
 
-            // close pop up
-            // driver.FindElement(By.XPath("/html/body/div[1]/div/div/div[2]/div/button[2]"))
-                // .Click();
-
-            Thread.Sleep(3000);
-
             // go to Automation chat
             driver.FindElement(By.CssSelector("#app-bar-86fcd49b-61a2-4701-b771-54728cd291fb"))
-                .Click();            
+                .Click();
 
             Logger.LogMessage("Loging finished");
         }
@@ -63,8 +57,7 @@ namespace selenium_nunit
         /// </summary>
         [TearDown]
         public void TearDown()
-        {
-            Console.WriteLine("TearDown method called");
+        {            
             Logger.LogMessage("Test result: XYZ");
             driver.Close();
         }
@@ -78,7 +71,15 @@ namespace selenium_nunit
             }
             else if (this.GetType() == typeof(TeamsFirefoxTest))
             {
-                return new FirefoxDriver();
+                FirefoxOptions options = new FirefoxOptions();
+
+                // Set the Firefox profile to allow third-party cookies
+                FirefoxProfile profile = new FirefoxProfile();
+                profile.SetPreference("network.cookie.cookieBehavior", 0); // 0 = Accept all cookies
+                profile.SetPreference("network.cookie.lifetimePolicy", 2); // 2 = Accept third-party cookies
+
+                options.Profile = profile;
+                return new FirefoxDriver(options);
             }
             else
             {

@@ -16,7 +16,7 @@ namespace selenium_nunit
         [Test]
         public void SendFile()
         {
-            Console.WriteLine("Send file in Chrome is running");
+            Logger.NewSession();
             Logger.LogMessage("Sending file in Chrome started");           
 
             base.SetUp();
@@ -55,7 +55,9 @@ namespace selenium_nunit
 
             Thread.Sleep(2000);
 
-            base.TearDown();            
+            base.TearDown();
+
+            Logger.LogMessage("Sending file in Chrome finished");
         }
 
         /// <summary>
@@ -64,6 +66,7 @@ namespace selenium_nunit
         [Test]
         public void WriteMessage()
         {
+            Logger.NewSession();
             Logger.LogMessage("Writing a message in Chrome started");
 
             base.SetUp();
@@ -77,9 +80,11 @@ namespace selenium_nunit
             driver.FindElement(By.XPath("/html/body/div[1]/div/div/div/div[7]/div/div/div[3]/div/div[4]/div[1]/div[3]/div/p"))
                 .SendKeys("Chrome Test Message" + Keys.Enter);
 
-            Thread.Sleep(10000);
+            Thread.Sleep(3000);
 
-            base.TearDown();            
+            base.TearDown();
+
+            Logger.LogMessage("Writing a message in Chrome finished");
         }
     }
 }

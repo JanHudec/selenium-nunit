@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,35 @@ namespace selenium_nunit
         [Test]
         public void WriteMessages()
         {
+            Logger.NewSession();
+            Logger.LogMessage("Writing messages in Firefox started");
 
+            base.SetUp();
+            Thread.Sleep(20000);
+
+            driver.SwitchTo().Frame(driver.FindElement(By.XPath("/html/body/div[6]/div/iframe")));
+            
+            Thread.Sleep(1000);
+
+            // write and send the messages
+            driver.FindElement(By.XPath("/html/body/div[1]/div/div/div/div[7]/div/div/div[3]/div/div[4]/div[1]/div[3]/div"))
+                .SendKeys("First Firefox Test Message" + Keys.Enter);
+
+            Thread.Sleep(1000);
+
+            driver.FindElement(By.XPath("/html/body/div[1]/div/div/div/div[7]/div/div/div[3]/div/div[4]/div[1]/div[3]/div"))
+                .SendKeys("Second Firefox Test Message" + Keys.Enter);
+
+            Thread.Sleep(1000);
+
+            driver.FindElement(By.XPath("/html/body/div[1]/div/div/div/div[7]/div/div/div[3]/div/div[4]/div[1]/div[3]/div"))
+                .SendKeys("Third Firefox Test Message" + Keys.Enter);
+
+            Thread.Sleep(3000);
+
+            base.TearDown();
+
+            Logger.LogMessage("Writing messages in Firefox finished");
         }
     }
 }
