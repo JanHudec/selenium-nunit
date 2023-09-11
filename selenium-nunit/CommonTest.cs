@@ -1,4 +1,7 @@
 ﻿using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +12,50 @@ namespace selenium_nunit
 {
     public class CommonTest
     {
+        protected IWebDriver driver;
+
         /// <summary>
         /// Method <c>SetUp</c> logs a test that is just starting and initialize the WebDriver.
         /// </summary>
         [SetUp]
         public void SetUp()
         {
-            Console.WriteLine("SetUp is running");            
+            Console.WriteLine("SetUp is running");
+            Logger.NewSession();
+            Logger.LogMessage("Loging started");
+            driver = GetWebDriver();
+
+            driver.Url = "https://teams.microsoft.com/";
+
+            Thread.Sleep(3000);
+
+            // enter email address
+            driver.FindElement(By.XPath("/html/body/div/form[1]/div/div/div[2]/div[1]/div/div/div/div/div[1]/div[3]/div/div/div/div[2]/div[2]/div/input[1]"))
+                .SendKeys(LoginCredentials.GetLogin() + Keys.Enter);
+
+            Thread.Sleep(3000);
+
+            // enter password
+            driver.FindElement(By.XPath("/html/body/div/form[1]/div/div/div[2]/div[1]/div/div/div/div/div/div[3]/div/div[2]/div/div[3]/div/div[2]/input"))
+                .SendKeys(LoginCredentials.GetPassword() + Keys.Enter);
+
+            // cancel stay logged in prompt
+            driver.FindElement(By.XPath("/html/body/div/form/div/div/div[2]/div[1]/div/div/div/div/div/div[3]/div/div[2]/div/div[3]/div[2]/div/div/div[1]/input"))
+                .Click();
+
+            Thread.Sleep(30000);
+
+            // close pop up
+            // driver.FindElement(By.XPath("/html/body/div[1]/div/div/div[2]/div/button[2]"))
+                // .Click();
+
+            Thread.Sleep(3000);
+
+            // go to Automation chat
+            driver.FindElement(By.CssSelector("#app-bar-86fcd49b-61a2-4701-b771-54728cd291fb"))
+                .Click();            
+
+            Logger.LogMessage("Loging finished");
         }
 
         /// <summary>
@@ -25,6 +65,25 @@ namespace selenium_nunit
         public void TearDown()
         {
             Console.WriteLine("TearDown method called");
+            Logger.LogMessage("Test result: XYZ");
+            driver.Close();
+        }
+
+
+        private IWebDriver GetWebDriver()
+        {
+            if (this.GetType() == typeof(TeamsChromeTest))
+            {
+                return new ChromeDriver();
+            }
+            else if (this.GetType() == typeof(TeamsFirefoxTest))
+            {
+                return new FirefoxDriver();
+            }
+            else
+            {
+                throw new NotImplementedException("Unsupported WebDriver type for the child class.");
+            }
         }
     }
 }

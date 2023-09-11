@@ -11,8 +11,9 @@ namespace selenium_nunit
             Logger.NewSession();
             Logger.LogMessage("Testing message");
 
-            Console.WriteLine(LoginCredentials.GetLogin());
-            Console.WriteLine(LoginCredentials.GetPassword());
+            TeamsChromeTest teamsChromeTest = new TeamsChromeTest();
+            teamsChromeTest.SendFile();
+            // teamsChromeTest.WriteMessage();
 
             Console.WriteLine("Program finished.");
         }
